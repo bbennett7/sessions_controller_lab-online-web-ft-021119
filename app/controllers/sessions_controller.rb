@@ -1,5 +1,8 @@
 class SessionsController < ApplicationController
   def new
+    if session[:name].present?
+      redirect_to root_path
+    end
   end
 
   def create
@@ -13,7 +16,8 @@ class SessionsController < ApplicationController
 
   def destroy
     if session[:name].present?
-      session[:name] = nil 
+      session[:name] = nil
     end
+    redirect_to sessions_new_path
   end
 end
